@@ -1,0 +1,145 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="sorting.js"></script>
+
+</head>
+<body>
+<div id="buttons">
+<ul>
+	<li><input type="button" id="alphBtn" value="Alphabetical" class="btnSort" /> <!-- <a href="#" class='btnSort' id='alphBtn' onClick='alphBtn()'>Alpha</a></li>-->
+	<li><input type="button" id="ratBtn" value="Rating" class="btnSort" /> <!-- <a href="#" class='btnSort' id='ratBtn' onClick='ratBtn()'>Rating</a></li> -->
+	<li><input type="button" id="priceBtn" value="Price" class="btnSortP"  /> <!-- <a href="#" class='btnSort' id='priceBtn' onClick='priceBtn()'>Price</a></li>-->
+</ul>
+</div>
+<div id="container">
+	<div class="listing">
+	<header>
+		<hgroup>
+			<h1 class="rating">Costa Adje Gran Hotel</h1>
+				<span class="stars" data-rating=>2</span>
+			<h2><a href="#">Sub-heading</a></h2>
+		</hgroup>
+<h2 class="price" data-price='1136.50'>£1136.50</h2>
+</header>
+<div class="img">
+<img src="images/image_01.png" />
+</div>
+<div class="info mini">
+<h1><a href='#'>Blurb goes here</a></h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse maximus magna nec tempus lobortis. Nam egestas euismod lacinia. Suspendisse potenti. Vivamus eget suscipit augue. Aenean justo augue, egestas non sapien ut, pretium cursus nibh. Aenean euismod neque nunc, sed placerat tortor sollicitudin ac. Aliquam erat volutpat. Curabitur vitae malesuada nisl. Integer eget nibh nibh.</p>
+<button>Book Now</button>
+</div>
+</div>
+<div class="listing">
+	<header>
+		<hgroup>
+			<h1 class="rating">Aquamarina Golf Hotel &amp; Apartments</h1>
+				<span class="stars">4</span>
+			<h2>Sub-heading</h2>
+		</hgroup>
+	<h2 class="price" data-price='499.99'>£499.99</h2>
+</header>
+<div class="img">
+<img src="images/image_02.png" />
+</div>
+<div class="info mini">
+<h1><a href='#'>Blurb goes here</a></h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse maximus magna nec tempus lobortis. Nam egestas euismod lacinia. Suspendisse potenti. Vivamus eget suscipit augue. Aenean justo augue, egestas non sapien ut, pretium cursus nibh. Aenean euismod neque nunc, sed placerat tortor sollicitudin ac. Aliquam erat volutpat. Curabitur vitae malesuada nisl. Integer eget nibh nibh.</p>
+<button>Book Now</button>
+</div>
+</div>
+<div class="listing">
+	<header>
+		<hgroup>
+			<h1 class="rating">Laguna Park</h1>
+			<span class="stars">3</span>
+			<h2>Sub-heading</h2>
+		</hgroup>
+		<h2 class="price" data-price='696.80'>£696.80</h2>
+</header>
+<div class="img">
+<img src="images/image_03.png" />
+</div>
+<div class="info mini">
+<h1><a href='#'>Blurb goes here</a></h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse maximus magna nec tempus lobortis. Nam egestas euismod lacinia. Suspendisse potenti. Vivamus eget suscipit augue. Aenean justo augue, egestas non sapien ut, pretium cursus nibh. Aenean euismod neque nunc, sed placerat tortor sollicitudin ac. Aliquam erat volutpat. Curabitur vitae malesuada nisl. Integer eget nibh nibh.</p>
+<button>Book Now</button>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+$.fn.reverse = [].reverse;
+
+function sortUsingNestedText(parent, childSelector, keySelector) {
+    var items = parent.children(childSelector).sort(function(a, b) {
+        var vA = $(keySelector, a).text();
+        var vB = $(keySelector, b).text();
+        return (vA < vB) ? -1 : (vA > vB) ? 1 : 0;
+    });
+    parent.append(items);
+}
+
+function sortUsingNestedNumber(parent, childSelector, keySelector) {
+    var items = parent.children(childSelector).reverse(function(a, b) {
+        var vA = $(keySelector, a).text();
+        var vB = $(keySelector, b).text();
+        return (vA < vB) ? -1 : (vA > vB) ? 1 : 0;
+    });
+    parent.append(items);
+}
+
+/* setup sort attributes */
+$('#priceBtn').data("sortKey", "h2.price");
+$('#alphBtn').data("sortKey", "h1");
+$('#ratBtn').data("sortKey", "span.stars");
+
+
+/* sort on button click */
+$(".btnSort").click(function() {
+		console.log("Button Clicked Text");
+   		sortUsingNestedText($('#container'), "div", $(this).data("sortKey"));
+});
+
+/* sort on button click */
+$(".btnSortP").click(function() {
+		console.log("Button Clicked Text");
+   		var $holidays = $('.listing'),
+	$holsPrice = $holidays.find('.price');
+
+$holsPrice.sort(function(a,b){
+	var an = a.getAttribute('data-price'),
+		bn = b.getAttribute('data-price');
+
+	if(an > bn) {
+		return 1;
+	}
+	if(an < bn) {
+		return -1;
+	}
+	return 0;
+});
+
+parent.append('#container');
+});
+</script> 
+<script type="text/javascript">
+$(document).ready(function() {
+	$('h1 a').click(function(event) {
+		if (event.target == this) {
+	$('div.info').toggleClass('mini');
+}
+});
+});
+</script>
+<script type="text/javascript">
+$(function() {
+    $('span.stars').stars();
+});
+</script>
+
+</body>
+</html>
